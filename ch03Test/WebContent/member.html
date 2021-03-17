@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입 페이지</title>
+ <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<style >
+	* {
+		font-family: 'Noto+Sans+KR';
+	}
+	body {
+	text-align : center;
+	background: yellow;
+	}
+	table {
+		border : 2px gray solid;
+		border-radius: 10px;
+		padding: 20px;
+		justify-content: center;
+		margin: auto;
+	}
+	td {
+		font-size: 18px;
+		float:left;
+		padding-left: 5px;
+	}
+	footer {
+		margin-top: 25px;
+		font-size:20px;
+	}
+</style>
+</head>
+	<body>
+		<!-- header -->
+		<h1>회원 가입 양식 페이지 입니다.</h1>
+			<!-- 양식 폼 -->
+			<form action="run01.jsp" method="post">
+				<table>
+					<!-- text 입력 란 -->
+					<tr> 
+						<td><strong> 아이디</strong></td>
+						<td> <input type = "text" name = "id"  placeholder = "아이디 입력"  value=""> </td>
+					</tr>
+					<tr> 
+					<!--  pwd 입력 란 ( text가 안보임) -->
+						<td><strong> 비밀번호</strong></td>
+						<td> <input type = "password" name = "pwd" placeholder = "비밀번호" value=""> </td>
+					</tr>
+					<tr>
+					<!--  radio 선택 란 -->
+						<td><strong> 성별 </strong></td>
+						<td> 
+							<input type="radio" name="gender" value="남"> 남
+							<input type="radio" name="gender" value="여"> 여
+						</td>
+					</tr>
+					<tr>
+					<!-- select option 선택 란 -->
+						<td><strong> 가입경로 </strong></td>
+						<td> 
+							<select name="intro" >
+								<option value="웹 검색" selected> 웹 검색 </option>
+								<option value="지인 소개"> 지인 소개 </option>
+								<option value="기타"> 기타 </option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+					<!-- select option 선택 란 -->
+						<td><strong> 주소지 </strong></td>
+						<td> 
+							<select name="addr" >
+								<option value="서울"> 서울 </option>
+								<option value="경기"> 경기 </option>
+								<option value="인천"> 인천 </option>
+								<option value="제주"> 제주 </option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+					<!-- 메모 입력란 row로 칸수 셋팅 -->
+						<td><strong> 메모 </strong></td>
+						<td> <textarea rows="3" name="memo" placeholder="자기소개"></textarea> </td>
+					</tr>
+				</table>	
+		<!-- footer -->
+				<footer>
+					<input type="submit" value="가입완료" onclick="alert('가입완료')">
+					<input type="reset" value="취소">
+				</footer>
+			</form>	
+	</body>
+</html>
