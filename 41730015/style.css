@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto+Sans+KR';
+    background: linear-gradient(to right, #fbcac9, #8ca6ce);
+}
+
+p {
+    margin-top: 20px;
+    text-decoration-line: none;
+    color: black;
+}
+
+input {
+    border:none;
+    border-bottom: 1px gray solid;
+    background-color: transparent;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+h2 {
+    display: inline-block;
+}
+
+.reset {
+	cursor: pointer;
+    background-color: rgb(235, 232, 232);
+    color: red;
+    border-bottom: none;
+    float: right;
+    margin-top: 25px;
+    font-size: 18px;
+    border-radius: 3px;
+}
+
+.reset:hover {
+    background-color: rgb(163, 160, 160);
+}
+
+strong {
+    float: left;
+}
+    
+/* 헤더*/  
+.title {
+	text-align: center;
+	font-size: 35px;
+}
+
+/* 로그인 폼 */ 
+.login {
+    margin-top: 50px;
+    
+}
+
+.login_form {
+    width: 400px;
+    padding: 30px 50px 50px 50px;
+    border: 1px silver solid;
+    background-color: white;
+    border-radius: 5px;
+    height: 550px;
+    margin: auto;
+    opacity: 0.8;
+    box-shadow: 2px 2px 2px black;
+}
+
+/* 제출 란 */
+.submit input {
+    cursor: pointer;
+    position: relative;
+    font-size: 25px;
+    text-align: center;
+    background-color: rgb(235, 232, 232);
+    border-radius: 3px;
+	border-bottom: none;
+    bottom: 0;
+    width: 400px;
+}
+
+.submit input:hover {
+    background-color: rgb(163, 160, 160);
+}
