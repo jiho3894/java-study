@@ -6,9 +6,43 @@
 <meta charset="UTF-8">
 <title> 데이터 입력 페이지</title>
 </head>
+<style>
+	body {
+		font-size: 20px;
+		background-color: skyblue;
+		text-align: center;
+	}
+	.home {
+		font-size:35px;
+		color: red;
+	}
+	
+	table {
+		border-radius: 5px;
+		text-align: center;
+		padding: 5px;
+		margin:auto;
+		margin-top:100px;
+	}
+	
+	table th {
+		background-color: yellow;
+	}
+	
+	a {
+		text-decoration: none;
+	}
+	
+	p {
+		text-decoration: none;
+		color: red;
+		font-size: 20px;
+		padding: 1px red solid;
+	}
+</style>
 <body>
-	<div> 학생 정보 등록 페이지</div>
-	<form action="whiter.jsp" method="post">
+	<div class="home"> 학생 정보 등록 페이지</div>
+	<form action="writer.jsp" method="post">
 		<table border=1>
 		<tr>
 			<th> 이름 </th>

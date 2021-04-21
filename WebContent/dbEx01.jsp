@@ -10,13 +10,12 @@
 <style>
 	body {
 		font-size: 20px;
-		background-color: skyblue;
+		background-color: pink;
 		text-align: center;
 	}
-
 	.home {
 		font-size:35px;
-		color: red;
+		color: blue;
 	}
 	
 	table {
@@ -28,7 +27,18 @@
 	}
 	
 	table th {
-		background-color: yellow;
+		background-color: white;
+	}
+	
+	a {
+		text-decoration: none;
+	}
+	
+	p {
+		text-decoration: none;
+		color: red;
+		font-size: 20px;
+		padding: 1px red solid;
 	}
 </style>
 <body>
@@ -85,5 +95,6 @@
 			}
 		%>
 		</table>
+		<a href="dbform.jsp">데이터 입력 사이트로 이동</a>
 </body>
 </html>
