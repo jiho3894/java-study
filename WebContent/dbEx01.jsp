@@ -48,7 +48,7 @@
 		<tr>
 			<th> 번호 </th>
 			<th> 이름 </th>
-			<th> 주소 </th> 
+			<th> 주소 </th>
 			<th> 입학년도 </th>
 			<th> 학과 </th>
 		</tr>
@@ -58,7 +58,7 @@
 				int id; /* 정수형 변수 선언 */
 		
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addb","park","1234");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addb","kim","1234");
 			/* if(conn != null) {
 				out.println("데이터베이스 연동 성공 <br>");
 				System.out.println("연결정보" + conn);
@@ -80,10 +80,12 @@
 			%>
 				<tr>
 					<td> <%=id %></td>
-					<td> <%=name %></td>
+					<td> <a href="view.jsp?id=<%=id%>"> <%=name %> </a></td>
 					<td> <%=address %></td>
+					
 					<td> <%=birthym %></td>
 					<td> <%=dept %></td>
+					
 				</tr>
 			<%
 			}

@@ -20,7 +20,7 @@
 		String birthym = request.getParameter("birthym");
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addb?useUnicode=true&characterEncoding=utf8","park","1234");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addb?useUnicode=true&characterEncoding=utf8","kim","1234");
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("select max(id) from test");
 		if(rs.next()){
@@ -49,5 +49,6 @@
 %>
 
 <a href="dbForm.jsp"> 학생정보 입력 페이지로 이동</a>
+<a href="dbEx01.jsp"> 학생정보 페이지로 이동</a>
 </body>
 </html>
