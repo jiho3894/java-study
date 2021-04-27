@@ -1,16 +1,16 @@
-최소 mysql 설치 할때 kim , 1234 로 설정
-mysql -u root -p
-create database addb;
-show databases;
-use mysql;
- grant insert, update, select, delete, create, drop, alter
-    -> on addb.* to 'kim'@'%' identified by '1234';
-
- grant insert, update, select, delete, create, drop, alter
+- 최소 mysql 설치 할때 kim , 1234 로 설정
+- mysql -u root -p
+- create database addb;
+- show databases;
+- use mysql;
+- grant insert, update, select, delete, create, drop, alter
+-    -> on addb.* to 'kim'@'%' identified by '1234';
+-
+- grant insert, update, select, delete, create, drop, alter
     -> on addb.* to 'park'@'localhost' identified by '1234';
 
-flush privileges;
-quit
+- flush privileges;
+- quit
 
 mysql -u root -p
 use addb;
