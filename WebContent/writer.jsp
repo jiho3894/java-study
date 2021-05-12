@@ -9,8 +9,34 @@
 <meta charset="utf-8">
 <title>데이터 입력 처리 페이지</title>
 </head>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		font-size: 20px;
+		background: linear-gradient(to right, pink, skyblue);
+		text-align: center;
+	}
+	
+	table {
+		border-radius: 5px;
+		text-align: center;
+		padding: 5px;
+		margin:auto;
+		margin-top:100px;
+	}
+	
+	.home {
+		font-size:35px;
+		color: black;
+	}
+	
+	a {
+		text-decoration: none;
+	}
+</style>
 <body>
-<div> 학생 정보 입력 완료 처리 페이지</div>
+<div class="home"> 학생 정보 입력 완료 처리 페이지</div>
 <%
 	try{
 		int id = 0;
@@ -20,7 +46,7 @@
 		String birthym = request.getParameter("birthym");
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addb?useUnicode=true&characterEncoding=utf8","kim","1234");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/15db?useUnicode=true&characterEncoding=utf8","kim","1234");
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("select max(id) from test");
 		if(rs.next()){
@@ -48,7 +74,7 @@
 		}
 %>
 
-<a href="dbForm.jsp"> 학생정보 입력 페이지로 이동</a>
+<a href="dbform.jsp"> 학생정보 입력 페이지로 이동</a>
 <a href="dbEx01.jsp"> 학생정보 페이지로 이동</a>
 </body>
 </html>

@@ -8,13 +8,15 @@
 </head>
 <style>
 	body {
+		margin: 0;
+		padding: 0;
 		font-size: 20px;
-		background-color: skyblue;
+		background: linear-gradient(to right, pink, skyblue);
 		text-align: center;
 	}
 	.home {
 		font-size:35px;
-		color: red;
+		color: black;
 	}
 	
 	table {
@@ -26,7 +28,7 @@
 	}
 	
 	table th {
-		background-color: yellow;
+		background-color: white;
 	}
 	
 	a {
@@ -36,7 +38,7 @@
 	p {
 		text-decoration: none;
 		color: red;
-		font-size: 20px;
+		font-size: 17px;
 		padding: 1px red solid;
 	}
 </style>
@@ -53,7 +55,7 @@
 			<td> <input type="text" name="address"> </td>
 		</tr>
 		<tr>
-			<th> 입학년도 </th>
+			<th> 출생년도 </th>
 			<td> <input type="text" name="birthym"> </td>
 		</tr>
 		<tr>
