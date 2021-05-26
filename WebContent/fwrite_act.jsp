@@ -5,7 +5,6 @@
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>    
 <%@ page import="java.util.*" %>
 <%@ page import="java.io.*" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,19 +17,17 @@
 /*  파일이 업로드 되는 실경로 설정  */ 
  ServletContext scontext = getServletContext(); 
  String realFolder = scontext.getRealPath("images"); 
-try{
-	String b_filename=""; 
-	String b_filesize=""; 
-	MultipartRequest multi = new MultipartRequest(request, realFolder, (1024*1024*5), "utf-8", new DefaultFileRenamePolicy()); 
-	Enumeration<?> files = multi.getFileNames(); 
-	String file1 = (String)files.nextElement(); 
-	String fileName1 = multi.getFilesystemName(file1); 
-	
-	if(fileName1 == null){
+	try{
+		String b_filename=""; 
+		String b_filesize=""; 
+		MultipartRequest multi = new MultipartRequest(request, realFolder, (1024*1024*5), "utf-8", new DefaultFileRenamePolicy()); 
+		Enumeration<?> files = multi.getFileNames(); 
+		String file1 = (String)files.nextElement(); 
+		String fileName1 = multi.getFilesystemName(file1);
+	if(fileName1 == null)	{
 		b_filename="default.png";
 		b_filesize = "5517Bytes"; 
-		
-	} else{
+	} else	{
 		b_filename = fileName1; 
 		File file = multi.getFile("b_filename"); 
 		b_filesize = ""+file.length()+"Bytes"; 
@@ -48,7 +45,7 @@ try{
 	Statement stmt = conn.createStatement(); 
 	ResultSet rs = stmt.executeQuery("select max(b_id) from mboard"); 
 	/* 작성 된 글 번호 처리 문  */ 
-	if(rs.next()){
+	if(rs.next())	{
 		b_id = rs.getInt(1);
 		b_id = b_id + 1; 
 		rs.close(); 
@@ -69,8 +66,7 @@ try{
 	pstmt.close(); 
 	conn.close(); 
 	response.sendRedirect("flist.jsp");
-	
-} catch(Exception e){
+} catch(Exception e)	{
 	out.println(e); 
 }
 %>

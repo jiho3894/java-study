@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
  <%@ page import="java.sql.* " %>   
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +8,7 @@
 <title>업로드 내용 확인 페이지 </title>
 </head>
 <body>
-<div>   업로드 내용 확인 페이지 </div>
+<h1> 업로드 내용 확인 페이지 </h1>
 <p> 
 <table border="1">
 <tr> 
@@ -29,13 +28,13 @@ try{
 	Statement stmt = conn.createStatement();
 	/* 페이지 처리하기 위한 구문  */ 
 	ResultSet rs0 = stmt.executeQuery("select count(b_id) from mboard"); 
-	if(rs0.next()){
+	if(rs0.next())	{
 		datacount = rs0.getInt(1); 
 		rs0.close(); 
 	}
 	int pagesize = 10; 
-	if((datacount%10) == 0) pagecount = datacount/(pagesize+1) + 1; 
-	else pagecount = datacount/ pagesize +1;
+	if((datacount%10) == 0) pagecount = datacount	/	(pagesize+1) + 1; 
+	else pagecount = datacount	/ pagesize +1;
 	int mypage = 1; int abpage = 1; 
 	if(request.getParameter("mypage") !=null){
 		mypage = Integer.parseInt(request.getParameter("mypage")); 
@@ -45,7 +44,7 @@ try{
 	ResultSet rs = stmt.executeQuery("select b_id, b_name, b_mail, b_title, b_content, date_format(b_data, '%y-%m-%d'), b_view, b_pwd, b_filename, b_filesize from mboard"); 
 	if(!rs.next()){
 		pagesize=0; 
-	}else {
+	}	else {
 		rs.absolute(abpage); 
 	}
 	for(int k=1; k<=pagesize; k++){
@@ -61,7 +60,7 @@ try{
 		b_filesize = rs.getString(10); 
 		if(!b_mail.equals("")){
 			mailtoyou="<a href=mailtoyou:" + b_mail + ">" + b_name + "</a>"; 
-		} else{
+		} else	{
 			mailtoyou = b_name; 
 		}
  %> 
@@ -70,18 +69,16 @@ try{
    <td> <img src="images/<%=b_filename %>"> </td>
    <td> <a href="fview.jsp?b_id=<%=b_id %>"> <%=b_title %> </a>  </td>
    <td> <%=mailtoyou %> </td> 
-    <td> <%=b_data %> </td> 
-    <td> <%=b_view %> </td> 
-    
+   <td> <%=b_data %> </td> 
+   <td> <%=b_view %> </td>    
  </tr>		
 <%		
 	if(rs.getRow() == datacount){
 		break; 
-	} else{
+	} else	{
 		rs.next(); 
 	}
-   	
-	}
+}
 	rs.close(); 
 	stmt.close(); 
 	conn.close();
@@ -98,16 +95,14 @@ try{
 			out.println("<a href=flist.jsp?mypage=" + l + ">" + l + "</a>"); 
 			out.println("|"); 
 		}
-	} else{
+	} else	{
 		out.println(mypage + "|"); 
 	}
-	
-	
-} catch(Exception e){
+} catch(Exception e)	{
 	out.println(e); 
 }
 %>
 <p> 
-<a href="fwrite.jsp">   등록 페이지로 이동 </a>
+<a href="fwrite.jsp"> 등록 페이지로 이동 </a>
 </body>
 </html>
