@@ -36,7 +36,8 @@
 			<td> <input type="password" name="b_pwd" value=""> </td> 
 		</tr>
 		<tr> 
-			<td colspan="2"> <input type="submit"  value="저장"> 
+			<td colspan="2"> 
+				<input type="submit"  value="저장"> 
 		  	<input type="reset" value="취소"> 
 		  </td> 
 		</tr>

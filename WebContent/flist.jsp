@@ -14,7 +14,7 @@
 <tr> 
   <th> 번호  </th> <th> 이미지  </th>
   <th> 제목  </th> <th> 작성자  </th>
-  <th> 작성일자  </th>    <th>  조회수  </th>
+  <th> 작성일자  </th> <th> 조회수 </th>
 </tr>  
 <%  request.setCharacterEncoding("utf-8");  %>
 <%
@@ -41,7 +41,7 @@ try{
 		abpage = (mypage -1) *pagesize + 1;
 		if(abpage <=0) abpage = 1; 
 	}
-	ResultSet rs = stmt.executeQuery("select b_id, b_name, b_mail, b_title, b_content, date_format(b_data, '%y-%m-%d'), b_view, b_pwd, b_filename, b_filesize from mboard"); 
+	ResultSet rs = stmt.executeQuery("select b_id, b_name, b_mail, b_title, b_content, date_format(b_data, '%y-%m-%d'), b_view, b_pwd, b_filename, b_filesize from mboard order by b_id desc"); 
 	if(!rs.next()){
 		pagesize=0; 
 	}	else {
@@ -54,8 +54,8 @@ try{
 		b_title = rs.getString(4); 
 		b_content = rs.getString(5); 
 		b_data = rs.getString(6); 
-		b_view = rs.getInt(7); 
-		b_pwd = rs.getString(8); 
+		b_view = rs.getInt(7);
+		b_pwd = rs.getString(8);
 		b_filename = rs.getString(9); 
 		b_filesize = rs.getString(10); 
 		if(!b_mail.equals("")){
@@ -66,7 +66,7 @@ try{
  %> 
  <tr> 
    <td> <%=b_id %> </td>
-   <td> <img src="images/<%=b_filename %>"> </td>
+   <td> <img width="300px" height="300px" src="images/<%=b_filename %>"> </td>
    <td> <a href="fview.jsp?b_id=<%=b_id %>"> <%=b_title %> </a>  </td>
    <td> <%=mailtoyou %> </td> 
    <td> <%=b_data %> </td> 
