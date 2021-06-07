@@ -11,6 +11,13 @@
 <meta charset="utf-8">
 <title> 상세 내용 보기 페이지 </title>
 </head>
+<style>
+	body {
+		width: 100%;
+		height: 100vh;
+		background: linear-gradient(#E0EAFC, #CFDEF3);
+	}
+</style>
 <body>
 <%
 /* 예외 처리문*/
@@ -19,8 +26,12 @@
 		int b_id, b_view;
 		String id =request.getParameter("b_id");
 		Class.forName("com.mysql.jdbc.Driver"); 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/15db?useUnicode=true&characterEncoding=utf8","kim","1234");
-		Statement stmt = conn.createStatement();
+		 /* jdbc Driver 설정 */ 
+		 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/addb?useUnicode=true&charaterEncoding=utf8","kim","1234");
+		 /* 데이터베이스 연결   
+		 데이터 베이스에서 실행할 질의어(쿼리) 처리*/ 
+		 Statement stmt = con.createStatement(); 
+		// 쿼리문장을 쓰기위한 stmt 선언
 		String sql = "select b_id, b_mail, b_title, b_content, date_format(b_data,'%y-%c-%e %H:%i:%s') , b_view, b_pwd, b_filename, b_filesize from mboard where b_id=" + id;
 		ResultSet rs = stmt.executeQuery(sql);
 		if(rs.next()){
@@ -59,23 +70,22 @@
 				</tr>
 				<tr> 
 					<td colspan="7">
-						<img src="images/<%=b_filename %>"> <br/>
+						<img src="image/<%=b_filename %>"> <br/>
 						 파일 크기: <%=b_filesize %>
 					</td>
 				</tr>
 			</table>
 		</div>
+		<a href="flist.jsp">  전체 목록  </a> |
+		<a href="fmodify.jsp?b_id=<%=b_id %>">  자료 수정 </a> 
 		<%
 		}
 		rs.close(); 	
 		stmt.executeUpdate("update mboard set b_view=b_view+1 where b_id="+id+""); 
-		conn.close(); 
+		con.close(); 
 	}	catch(Exception e) {
 		out.println(e);
 	}
 %>
-
-	<a href="flist.jsp">  전체 목록  </a> |
-	<a href="fmodify.jsp">  자료 수정 </a> 
 </body>
 </html>

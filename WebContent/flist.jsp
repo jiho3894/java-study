@@ -7,6 +7,13 @@
 <meta charset="utf-8">
 <title>업로드 내용 확인 페이지 </title>
 </head>
+<style>
+	body {
+		width: 100%;
+		height: 100vh;
+		background: linear-gradient(#E0EAFC, #CFDEF3);
+	}
+</style>
 <body>
 <h1> 업로드 내용 확인 페이지 </h1>
 <p> 
@@ -22,10 +29,10 @@ try{
 	String b_name, b_mail, b_title, b_content, b_data, b_pwd, b_filename, b_filesize, mailtoyou; 
 	int b_id, b_view, pagecount; 
 	int datacount = 0; 
-	/*  데이터베이스 연동 - 드라이버 설정  */ 
 	Class.forName("com.mysql.jdbc.Driver"); 
-	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/15db?useUnicode=true&characterEncoding=utf8","kim","1234"); 
-	Statement stmt = conn.createStatement();
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/addb?useUnicode=true&charaterEncoding=utf8","kim","1234");
+	Statement stmt = con.createStatement(); 
+	// 쿼리문장을 쓰기위한 stmt 선언
 	/* 페이지 처리하기 위한 구문  */ 
 	ResultSet rs0 = stmt.executeQuery("select count(b_id) from mboard"); 
 	if(rs0.next())	{
@@ -66,7 +73,7 @@ try{
  %> 
  <tr> 
    <td> <%=b_id %> </td>
-   <td> <img width="300px" height="300px" src="images/<%=b_filename %>"> </td>
+   <td> <img width="300px" height="300px" src="image/<%=b_filename %>"> </td>
    <td> <a href="fview.jsp?b_id=<%=b_id %>"> <%=b_title %> </a>  </td>
    <td> <%=mailtoyou %> </td> 
    <td> <%=b_data %> </td> 
@@ -81,7 +88,7 @@ try{
 }
 	rs.close(); 
 	stmt.close(); 
-	conn.close();
+	con.close();
 %>
 	</table>
 	<%  /*  페이지 가 번호 로 처리 되는 구문  */ 
@@ -104,5 +111,6 @@ try{
 %>
 <p> 
 <a href="fwrite.jsp"> 등록 페이지로 이동 </a>
+<a href="fsearch.jsp"> 검색 페이지로 이동 </a>
 </body>
 </html>
