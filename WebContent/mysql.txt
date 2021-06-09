@@ -1,0 +1,48 @@
+mysql> create database udb;
+
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use mysql;
+
+Database changed
+
+mysql> grant insert, update, select, delete, create, alter, drop
+
+    -> on udb.* to 'jiho'@'localhost' identified by '1234';
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> grant insert, update, select, delete, create, alter, drop
+
+    -> on udb.* to 'jiho'@'%' identified by '1234';
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> flush privileges;
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> quit
+
+Bye
+
+C:\Users\kim>mysql -u jiho -p
+
+Enter password: ***
+
+mysql> use udb;
+
+mysql> create table mboard(
+    -> b_id int not null auto_increment,
+    -> b_name varchar(30) not null,
+    -> b_title varchar(50),
+    -> b_mail varchar(50),
+    -> b_content mediumtext,
+    -> b_date datetime,
+    -> b_view int(11),
+    -> b_pwd varchar(10) not null,
+    -> b_filename varchar(50),
+    -> b_filesize varchar(50),
+    -> primary key(b_id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
