@@ -8,98 +8,153 @@
 <title>검색 결과 처리 페이지 </title>
 </head>
 <style>
-	body {
-		width: 100%;
-		height: 100vh;
-		background: linear-gradient(#E0EAFC, #CFDEF3);
+	* {
+		font-family: 'Noto+Sans+KR';
 	}
+
+	html {
+		width: 100%;
+		background: linear-gradient(#EECDA3, #EF629F);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	}
+
+  body {
+  	width: 50%;
+    background: linear-gradient(#E0EAFC,#CFDEF3 );
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h2 {
+    text-align: center;
+    color: hotpink;
+  }
+
+  form {
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  
+  header {
+    text-align: center;
+    font-size: 25px;
+    margin: 35px;
+  }
+
+  a {
+    text-decoration: none;
+    color: blueviolet;
+    border-radius: 10px;
+    font-size: 20px;
+  }
+
+  a:hover {
+    background-color: skyblue;
+  }
+  
+  tr th {
+  	background-color: chartreuse;
+  }
+  
+  td {
+  	font-size: 20px;
+  	font-weight: 500;
+  	text-align:center;
+  }
 </style>
 <body>
 <% request.setCharacterEncoding("utf-8");  %>
 <% 
-   try{ /*  검색하는 항목  */ 
+   try{ 
 	   String searchk = request.getParameter("searchk");
-        /*  검색하는 키워드  */ 
 	   String searchw = request.getParameter("searchw");
-        //System.out.println(searchk); 
-        //System.out.println(searchw); 
-        String b_title, b_name;
-        int b_id = 0;
-        int datacount = 0; 
-        int pagecount; /*  글목록 전체 페이지 수 저장 */ 
-        /*  데이터베이스 연동   */
-        /* 데이터베이스 드라이버 설정 */ 
-        Class.forName("com.mysql.jdbc.Driver"); 
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/addb?useUnicode=true&characterEncoding=utf8", "kim", "1234"); 
-	    Statement stmt = con.createStatement(); 
-	    ResultSet rs0 = stmt.executeQuery("select count(b_id) from mboard where "+searchk+" like '%" + searchw +"%' "); 
-	    if (rs0.next()){
+	   /* table field 변수 설정 */
+     String b_title, b_name, b_filename;
+     int b_id = 0;
+     int datacount = 0; 
+     int pagecount; 
+     Class.forName("com.mysql.jdbc.Driver"); 
+	 		/* jdbc Driver 설정 */ 
+		 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/addb?useUnicode=true&charaterEncoding=utf8","kim","1234");
+	 		/* 데이터베이스 연결   
+	 		데이터 베이스에서 실행할 질의어(쿼리) 처리*/ 
+		 Statement stmt = con.createStatement(); 
+			// 쿼리문장을 쓰기위한 stmt 선언 
+	   ResultSet rs0 = stmt.executeQuery("select count(b_id) from mboard where "+searchk+" like '%" + searchw +"%' "); 
+	   if (rs0.next()){
 	    	datacount=rs0.getInt(1); 
 	    	rs0.close(); 
 	    }
-	    int pagesize = 5; /* 한 페이지에 글 목록 수   */
-	    pagecount = datacount / pagesize; 
-	    if(datacount % pagesize > 0){
+	   /* page 노출 수 지정 */
+	   int pagesize = 10;
+	   pagecount = datacount / pagesize; 
+	   if(datacount % pagesize > 0){
 	    	pagecount++; 
-	    }
-	    int mypage = 1; 
-	    int abpage = 1; 
-	    if(request.getParameter("mypage") !=null ){
-	    	mypage = Integer.parseInt(request.getParameter("mypage")); 
+	   }
+	   int mypage = 1; 
+	   int abpage = 1; 
+	   if(request.getParameter("mypage") !=null ){
+	   		mypage = Integer.parseInt(request.getParameter("mypage")); 
 	    	abpage = (mypage -1) * pagesize; 
-	    	if(abpage <=0 ) abpage =1; 
-	    }
-	    String sql = "select b_id, b_title, b_name from mboard where "+searchk+" like '%"+searchw+"%' order by b_id desc"; 
-	    System.out.println(sql);  /* cosole 창에서 sql 문 확인 출력   */  
-	    ResultSet rs = stmt.executeQuery(sql); 
-	    if(!rs.next()){
+	   if(abpage <=0 ) abpage =1; 
+	   }
+	   String sql = "select b_id, b_title, b_name, b_filename from mboard where "+searchk+" like '%"+searchw+"%' order by b_id desc"; 
+	   ResultSet rs = stmt.executeQuery(sql); 
+	   if(!rs.next()){
 	    	pagesize = 0; 
-	    } else{
+	   } else {
 	    	rs.absolute(abpage); 
-	    }
-	    %> 
-	    <div>  검색 결과 내용 </div>
-	    <table border="1"> 
-	      <tr>  
-	        <th> 번호  </th>
-	        <th> 제목  </th>
-	        <th> 작성자 </th>  
-	      </tr>
-	    <%
-	    for(int k=1; k<=pagesize; k++){
-	      b_id = rs.getInt(1);
-	      b_title = rs.getString(2); 
-	      b_name = rs.getString(3);    
-	    %>
+	 }
+%> 
+  <h2>검색 결과 내용</h2>
+		<header>
+	 		<a href="fsearch.jsp">검색 페이지</a>
+		    <span>||</span>
+		  <a href="flist.jsp">리스트 페이지</a>
+		</header>
+	  <table border="1"> 
+	    <tr>  
+	      <th> 번호  </th>
+	      <th> 제목  </th>
+	      <th> 작성자 </th>  
+	      <th> 이미지 </th>
+	    </tr>
+<%
+	for(int k=1; k<=pagesize; k++){
+	  b_id = rs.getInt(1);
+	  b_title = rs.getString(2); 
+	  b_name = rs.getString(3);    
+	  b_filename = rs.getString(4);
+%>
 	    <tr> 
 	      <td> <%=b_id %> </td>
 	      <td> <%=b_title %> </td>
 	      <td> <%=b_name %> </td> 
+	      <td> <img width="300px" height="300px" src="image/<%=b_filename %>"> </td>
 	    </tr>
-	    <%
-	    if(rs.getRow()==datacount){
-	      break; 
-	    }	else{
-	      	rs.next(); 
-	    	}
-	    }
-	    %>
-	  </table>
-	<%
-	if(pagecount !=1){
-		for(int l=1; l<=pagecount; l++) {
-			out.println("<a href=fsearch.jsp?mypage=" + l + ">" + l + " |</a>");
-		}
-	} else {
-		out.println("1");
+<%
+	if(rs.getRow()==datacount){
+		break; 
+	}	else {
+		rs.next(); 
 	}
-		con.close(); 
-	  stmt.close(); 
-  } catch(Exception e) {
-	  out.println(e); 
+}
+	    %>
+<%
   }
-	%>
-<a href="fsearch.jsp">검색 페이지</a>
-<a href="flist.jsp">리스트 페이지</a>
-</body>
+  catch(Exception e) {  /* 예외 처리문 - 오류 처리 문 */ 
+		out.println(e); 
+	}
+%>
+		</table>
+	</body>
 </html>
