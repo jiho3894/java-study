@@ -46,3 +46,17 @@ mysql> create table mboard(
     -> primary key(b_id)
     -> );
 Query OK, 0 rows affected (0.05 sec)
+
+mysql> alter database codb default character set utf8;
+
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use codb;
+
+Database changed
+
+mysql> alter table number convert to charset utf8;
+
+Query OK, 1 row affected (0.05 sec)
+
+Records: 1  Duplicates: 0  Warnings: 0
