@@ -1,8 +1,8 @@
-package testjava03;
+package ch01data;
 
 import java.util.Scanner;
 
-public class Submit {
+public class DepositEx01 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -12,37 +12,38 @@ public class Submit {
 		
 		while(run) {
 			System.out.println("---------------------------------------");
-			System.out.println("1.¿¹±Ý  |   2.Ãâ±Ý  |  3.ÀÜ°í  |  4.Á¾·á");
+			System.out.println("1.ì˜ˆê¸ˆ  |   2.ì¶œê¸ˆ  |  3.ìž”ê³   |  4.ì¢…ë£Œ");
 			System.out.println("---------------------------------------");
-			/*nextLine()Àº ¸¶Áö¸· enter¸¦ Á¦°ÅÇÏÁö ¾Ê¾Æ ±× ÀÌÈÄ
-			 * ÀÔ·ÂÃ³¸®°¡ ¹®Á¦°¡ ¹ß»ýÇÒ ¼ö ÀÖ¾î int °ª ÇüÅÂ·Î º¯È¯ÇØÁÖ´Â°ÍÀÌ
-			 * ¾ÈÀüÇÑ ¹æ¹ý*/
+			/*nextLine()ì€ ë§ˆì§€ë§‰ enterë¥¼ ì œê±°í•˜ì§€ ì•Šì•„ ê·¸ ì´í›„
+			 * ìž…ë ¥ì²˜ë¦¬ê°€ ë¬¸ì œê°€ ë°œìƒí•  ìˆ˜ ìžˆì–´ int ê°’ í˜•íƒœë¡œ ë³€í™˜í•´ì£¼ëŠ”ê²ƒì´
+			 * ì•ˆì „í•œ ë°©ë²•*/
+			System.out.print("ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš” >>> ");
 			int inputData = Integer.parseInt(scanner.nextLine());
 			
 			if(inputData == 1) {
-				System.out.println("¼±ÅÃ > " + inputData + "¹ø");
-				System.out.println("¿¹±Ý¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+				System.out.println("ì„ íƒ > " + inputData + "ë²ˆ");
+				System.out.print("ì˜ˆê¸ˆì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš” : ");
 				balance += Integer.parseInt(scanner.nextLine());
-				System.out.println("¿¹±Ý¾×: " + balance);
+				System.out.println("ì˜ˆê¸ˆì•¡: " + balance);
 			}
 			
 			if(inputData == 2) {
-				System.out.println("¼±ÅÃ > " + inputData + "¹ø");
-				System.out.println("Ãâ±Ý¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+				System.out.println("ì„ íƒ > " + inputData + "ë²ˆ");
+				System.out.print("ì¶œê¸ˆì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”: ");
 				balance -= Integer.parseInt(scanner.nextLine());
-				System.out.println("Ãâ±Ý¾×: " + balance);
+				System.out.println("ì¶œê¸ˆ í›„  ê¸ˆì•¡ : " + balance);
 			}
 			
 			if(inputData == 3) {
-				System.out.println("¼±ÅÃ > " + inputData + "¹ø");
-				System.out.println(balance);
+				System.out.println("ì„ íƒ > " + inputData + "ë²ˆ");
+				System.out.println("ìž”ê³ :" + balance);
 			}
 			
 			if(inputData == 4) {
 				break;
 			}
 		}
-		System.out.println("ÇÁ·Î±×·¥ Á¾·á");
+		System.out.println("í”„ë¡œê·¸ëž¨ ì¢…ë£Œ");
 	}
 
 }
