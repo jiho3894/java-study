@@ -1,17 +1,20 @@
+package week8;
+
 import java.util.Scanner;
 
-public class student {
+public class test2 {
 
    public static void main(String[] args) {
       // TODO Auto-generated method stub
       Scanner input = new Scanner(System.in);
       while(true) {
-         System.out.println("ÇĞÁ¡À» ¹®ÀÚ·Î ÀÔ·ÂÇÏ½Ã¿À: ");
+         System.out.println("í•™ì ì„ ë¬¸ìë¡œ ì…ë ¥í•˜ì‹œì˜¤: ");
          
          char grade = input.next().charAt(0);
          double gPoints = 0;
          
-         switch(grade) {												//ÇĞÁ¡º° Á¡¼ö ÁöÁ¤//
+         switch(grade) {	//í•™ì ë³„ ì ìˆ˜ ì§€ì •
+         						// ëŒ€ì†Œë¬¸ì êµ¬ë¶„í•˜ê¸°
                case 'A': case 'a':
                   gPoints = 4.0;
                   break;
@@ -28,15 +31,19 @@ public class student {
                   gPoints = 0.0;
                   break;
                default:
-                  System.out.println("ÇĞÁ¡À» ´Ù½Ã ÀÔ·ÂÇÏ½Ã¿À.");				
+                  System.out.println("í•™ì ì„ ë‹¤ì‹œ ì…ë ¥í•˜ì‹œì˜¤.");				
          }
-         System.out.println("ÆòÁ¡ = " + gPoints);			
-         System.out.println("ÇÁ·Î±×·¥ °è¼Ó(y), Á¾·á(q ÀÔ·Â)");					
+         System.out.println("í‰ì  = " + gPoints);			
+         System.out.println("í”„ë¡œê·¸ë¨ ê³„ì†(Y ì…ë ¥), ì¢…ë£Œ(Q ì…ë ¥)");					
          Scanner inputStop = new Scanner(System.in);
          char stop = inputStop.next().charAt(0);
-         if(stop == 'q') {
-            System.out.println("ÇÁ·Î±×·¥ Á¾·áÀÔ´Ï´Ù.");
-            break;
+         if(stop == 'q' || stop == 'Q') {
+             System.out.println("í”„ë¡œê·¸ë¨ ì¢…ë£Œì…ë‹ˆë‹¤.");
+             break;
+          }
+         if(stop != 'y' && stop != 'Y') {
+        	 System.out.println("ë¬¸êµ¬ë¥¼ ì˜ëª»ì…ë ¥í•˜ì—¬ ê°•ì œ ì¢…ë£Œí•©ë‹ˆë‹¤.");
+        	 break;
          }
       }
    }
