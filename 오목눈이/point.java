@@ -1,47 +1,55 @@
-import java.util.HashMap;
+package week8;
+
+import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Iterator;
 import java.util.Scanner;
-import java.util.Set;
 
-public class point {
+public class test {
+	public static void main(String[] args) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("** í¬ì¸íŠ¸ ê´€ë¦¬ í”„ë¡œê·¸ëž¨ìž…ë‹ˆë‹¤ **");
+		while(true) {
+			try {
+				System.out.print("ì´ë¦„ê³¼ í¬ì¸íŠ¸ ìž…ë ¥ >> ");
+		        String name = sc.next();
+		        if(name.equals("ê·¸ë§Œí•˜ê¸°")) {
+		        	System.out.println("í”„ë¡œê·¸ëž¨ ì¢…ë£Œ");
+		       	 	break;
+		        }
+		        int point = sc.nextInt();
+		        list.add(new Member(name,point));
+		        for(int i = 0; i < list.size(); i++) {
+		        	if(name.equals(list.get(i).getName())) {
+		        		point =+ list.get(i).getPoint();
+		        		System.out.println("(" + list.get(i).getName() + "," + point + ")");
+		        	} else {
+		        	System.out.println("(" + list.get(i).getName() + "," + list.get(i).getPoint() + ")");
+		        	}
+		        }
+			} catch	(InputMismatchException e) {
+	               System.out.println("ì´ë¦„ì„ ë¨¼ì € ìž…ë ¥í•´ì£¼ì„¸ìš”.");
+			}
+		}	
+	}
+}
 
-   public static void main(String[] args) {
-         Scanner sc = new Scanner(System.in);
-         HashMap<String, Integer> manage = new HashMap<String, Integer>();
-         System.out.println("** Æ÷ÀÎÆ® °ü¸® ÇÁ·Î±×·¥ÀÔ´Ï´Ù **");
-         while(true) {
-            System.out.print("ÀÌ¸§°ú Æ÷ÀÎÆ® ÀÔ·Â >> ");
-            String name = sc.next();
-            if(name.equals("½ºÅé"))
-               break;
-
-            try {
-               int point = sc.nextInt();
-            
-            
-            
-            if(manage.get(name) == null) {
-               manage.put(name, point);
-            }
-            
-            else {
-               manage.put(name,  manage.get(name)+point);
-            }
-            } catch(InputMismatchException e) {
-               System.out.println("ÀÌ¸§À» ¸ÕÀú ÀÔ·ÂÇØÁÖ¼¼¿ä.");
-            }
-            Set<String> key = manage.keySet();
-            Iterator<String> it = key.iterator();
-            while(it.hasNext()) {
-               String people = it.next();
-               Integer sum = manage.get(people);
-               System.out.print("("+people+","+sum+")");
-            }
-            System.out.println();
-         }
-        
-         sc.close();
-        
-      }
-   }
+class Member {
+	private String name;
+	private int point;
+	
+	public Member() {}
+	
+	public Member(String name, int point) {
+		this.name = name;
+		this.point = point;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public int getPoint() {
+		return point;
+	}
+}
