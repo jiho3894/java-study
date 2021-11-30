@@ -1,0 +1,35 @@
+mysql -u root -p
+create database smddb;
+use smddb;
+
+mysql> create table st(
+    -> sid int not null auto_increment,
+    -> name varchar(30) not null,
+    -> dept varchar(40),
+    -> gpa float,
+    -> year varchar(20),
+    -> primary key(sid));
+
+mysql> grant insert, select, update, delete, alter, create, drop
+    -> on kimdb.* to 'jiho'@'localhost' identified by '1234';
+
+mysql> grant insert, select, update, delete, alter, create, drop
+    -> on kimdb.* to 'jiho'@'$' identified by '1234';
+
+mysql> alter table st convert to character set utf8;
+
+mysql> insert into st(name, dept, gpa, year) values(
+    -> '이규화', '컴공', 4.3, '2017년도');
+
+mysql> select * from st;
+
+
+/* 삭제방법 */
+mysql> DELETE FROM st WHERE sid=5;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SET @CNT = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> UPDATE st SET st.sid = @CNT:=@CNT+1;
+Query OK, 2 rows affected (0.01 sec)
