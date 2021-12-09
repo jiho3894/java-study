@@ -1,0 +1,41 @@
+// 1)
+#include "mcube_stm32f407vg.h"
+
+// 2)
+// initialize  COM1 => USART2 (PA2= TX, PA3 => RX)
+void ComInit(void)
+{
+   USART_InitTypeDef USART_InitStruct;
+   USART_InitStruct.USART_BaudRate = 9600;
+   USART_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+   USART_InitStruct.USART_Mode = USART_Mode_Tx;
+   USART_InitStruct.USART_Parity = USART_Parity_No;
+   USART_InitStruct.USART_StopBits = USART_StopBits_1 ;
+   USART_InitStruct.USART_WordLength = USART_WordLength_8b;
+   
+   USART_COMInit(COM1,&USART_InitStruct);
+}
+
+// 3)
+void printText(void)
+{
+  unsigned char text[]="Hello! MCU World!! \r\n";
+  unsigned char i = 0;
+  
+  while(text[i] != '\0') {
+    COM1_putchar(text[i++]);
+  }
+    
+}
+
+// 4)
+void main(void)
+{  
+  ComInit();
+  
+  while(1)
+  {    
+    printText();
+  }
+}
+
