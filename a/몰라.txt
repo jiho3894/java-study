@@ -1,0 +1,15 @@
+create user 'kimjiho'@'%' identified by '1234';
+
+grant all privileges on *.* to 'kimjiho'@'%';
+
+flush privileges;
+
+create database 41730015db;
+
+use 41730015db;
+
+create table st(sid int not null auto_increment, name varchar(30) not null, dept varchar(40), gpa float, year varchar(20), primary key(sid));
+
+alter table st convert to character set utf8;
+
+exit mysql -u kimjiho -p;
