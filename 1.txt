@@ -19,11 +19,13 @@ void ComInit(void)
 // 3)
 void printText(void)
 {
-  unsigned char text[]="Hello! MCU World!! \r\n";
+  unsigned char text[]="2021/12/13 14:03: \r\n";
   unsigned char i = 0;
+  int num = i;
   
   while(text[i] != '\0') {
-    COM1_putchar(text[i++]);
+    COM1_putchar(text[i++]+num);
+    delay_nms(1000);
   }
     
 }
@@ -38,4 +40,3 @@ void main(void)
     printText();
   }
 }
-
