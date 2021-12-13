@@ -1,5 +1,6 @@
 package connectDB;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -25,10 +26,10 @@ public class DBSearchUI extends JFrame implements ActionListener {
 	private JComboBox mSelect; 
 	private String[] depts = {"스마트IT", "컴퓨터", "디스플레이", "메카", "자동차"}; 
 	JTextField mKeyword, mName, mDept, mGpa, mYear, mSid;
-	JButton btnSearch, btnPrev, btnNext, btnExit, btnMod, btnRegister, btnDel;
+	JButton btnList, btnSearch, btnPrev, btnNext, btnExit, btnMod, btnRegister, btnDel, btnReset;
 	
 	public DBSearchUI() {
-		setTitle("SearchUI");
+		setTitle("41730015 B반 김지호");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		mSid = new JTextField(20);
@@ -53,28 +54,35 @@ public class DBSearchUI extends JFrame implements ActionListener {
 		btnRegister.addActionListener(this);
 		btnExit = new JButton("종료");
 		btnExit.addActionListener(this);
+		btnReset = new JButton("다시 입력");
+		btnReset.addActionListener(this);
+		btnList = new JButton("목록");
+		btnList.addActionListener(this);
 		
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0,2,10,3));
+		panel.setLayout(new GridLayout(0,2,10,10));
 		panel.add(mKeyword);
 		panel.add(btnSearch);
 		
 //		panel.add(new JLabel("SID", SwingConstants.RIGHT));
 //		panel.add(mSid);
-		panel.add(new JLabel("NAME", SwingConstants.RIGHT));
+		panel.add(new JLabel("이름", SwingConstants.RIGHT));
 		panel.add(mName);
-		panel.add(new JLabel("DEPT", SwingConstants.RIGHT));
+		panel.add(new JLabel("학과", SwingConstants.RIGHT));
 		panel.add(mDept);
-		panel.add(new JLabel("GPA", SwingConstants.RIGHT));
+		panel.add(new JLabel("학점", SwingConstants.RIGHT));
 		panel.add(mGpa);
-		panel.add(new JLabel("YEAR", SwingConstants.RIGHT));
+		panel.add(new JLabel("입학년도", SwingConstants.RIGHT));
 		panel.add(mYear); 
 		panel.add(btnPrev);   /*  현재 검색된 데이터의 이전 내용 */ 
 		panel.add(btnNext);  /* 현재 검색된 데이터의 다음 내용  */ 
-		panel.add(btnMod); /*수정*/
-		panel.add(btnDel); /*삭제*/
-		panel.add(btnExit);   /*  종료 버튼 */ 
+		panel.add(btnMod);  /*수정*/
+		panel.add(btnDel);    /*삭제*/
+		panel.add(btnExit);    /*  종료 버튼 */ 
+		panel.add(btnList);
 		panel.add(btn1);
+		btn1.setBackground(Color.YELLOW);
+		btn1.setForeground(Color.RED);
 		
 		setLayout(new FlowLayout(FlowLayout.CENTER, 10,10)); 
 		add(panel); 
@@ -92,10 +100,10 @@ public class DBSearchUI extends JFrame implements ActionListener {
 	
 	public class Part2 extends JFrame{
 		Part2() {
-			setTitle("데이터 등록");
+			setTitle("정보 등록 창");
 			setDefaultCloseOperation(EXIT_ON_CLOSE);
 			JPanel panel = new JPanel();
-			panel.setLayout(new GridLayout(0,2,10,5));
+			panel.setLayout(new GridLayout(0,2,10,10));
 			setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
 			JButton btn1 = new JButton("검색 창");
 			
@@ -105,17 +113,21 @@ public class DBSearchUI extends JFrame implements ActionListener {
 			mGpa = new JTextField(10);
 			mYear = new JTextField(10);
 			
-			panel.add(new JLabel("NAME", SwingConstants.RIGHT));
+			panel.add(new JLabel("이름", SwingConstants.RIGHT));
 			panel.add(mName);
-			panel.add(new JLabel("DEPT", SwingConstants.RIGHT)); 
+			panel.add(new JLabel("학과", SwingConstants.RIGHT)); 
 			panel.add(mSelect); 
-			panel.add(new JLabel("GPA", SwingConstants.RIGHT));
+			panel.add(new JLabel("학점", SwingConstants.RIGHT));
 			panel.add(mGpa);
-			panel.add(new JLabel("YEAR", SwingConstants.RIGHT));
+			panel.add(new JLabel("입학년도", SwingConstants.RIGHT));
 			panel.add(mYear);
 			panel.add(btnRegister);
+			panel.add(btnReset);
 			panel.add(btnExit);
 			panel.add(btn1);
+			btn1.setBackground(Color.YELLOW);
+			btn1.setForeground(Color.RED);
+			
 			add(panel);
 			pack();
 			connect();
@@ -138,7 +150,7 @@ public class DBSearchUI extends JFrame implements ActionListener {
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		String url= "jdbc:mysql://localhost:3306/41730015db?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf8";
+		String url= "jdbc:mysql://localhost:3306/41730015db?useSSL=false&useUnicode=true&characterEncoding=utf8";
 		String username="kimjiho";   /*  root */ 
 		String password="1234"; 
 		/*  질의어 처리 */ 
@@ -201,7 +213,9 @@ public class DBSearchUI extends JFrame implements ActionListener {
 					if(!rs.isFirst()) {
 						rs.previous(); 
 						showRecord(); 
-					} 
+					} else {
+						System.out.println("처음 페이지 입니다.");
+					}
 				} catch (Exception e) {
 					System.out.println("목록이 없습니다.");
 				}
@@ -210,6 +224,8 @@ public class DBSearchUI extends JFrame implements ActionListener {
 					if(!rs.isLast()) {
 						rs.next(); 
 						showRecord(); 
+					} else {
+						System.out.println("마지막 페이지 입니다.");
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -225,9 +241,22 @@ public class DBSearchUI extends JFrame implements ActionListener {
 				stmt.execute(sql);
 				System.out.println("삭제완료.");
 				reset();
+			}  else if(event.getSource() == btnList) {
+				String word = mKeyword.getText(); 
+				stmt.setString(1, word+"%");
+				stmt.setString(2, word+"%");
+				if(word.isEmpty()) {
+					rs = stmt.executeQuery(); 
+					rs.next();
+					showRecord(); 
+				} else {
+					System.out.println("오류 발생");
+				}
 			}  else if(event.getSource() == btnExit) {  /* 종료 버튼  */ 
 				disconnect(); 
 				System.exit(0);
+			} else if(event.getSource() == btnReset) {
+				reset();
 			}
 		} catch(SQLException e) {
 			System.out.println("정보가 없습니다.");
